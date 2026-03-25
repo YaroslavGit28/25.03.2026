@@ -8,7 +8,7 @@ const countSpan = document.getElementById("count");
 
 // ОШИБКА 1: Исправлен click на submit submit	При отправке формы|click	При клике мышкой
 addForm.addEventListener("submit", (e) => {
-  e.preventDefault();
+  e.preventDefault(); // отмена дефолтного поведения, без нее будет обновляться вся страница
   const name = nameInput.value.trim();
   // trim - удаление пробелов с начала и конца
 
