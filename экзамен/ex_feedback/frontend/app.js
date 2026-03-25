@@ -2,10 +2,6 @@ const API = "/api";
 
 let selectedProductId = 1; // текущий выбранный товар
 
-/* ═══════════════════════════════════════
-   ТОВАРЫ  — полностью готово
-   ═══════════════════════════════════════ */
-
 const productsBar = document.getElementById("products-bar");
 
 async function loadProducts() {
@@ -32,10 +28,6 @@ async function loadProducts() {
   }
 }
 
-/* ═══════════════════════════════════════
-   ОТЗЫВЫ  — задание студента
-   ═══════════════════════════════════════ */
-
 const reviewsList = document.getElementById("reviews-list");
 
 // Вспомогательная функция — рендер звёзд
@@ -44,55 +36,7 @@ function renderStars(rating) {
 }
 
 async function loadReviews() {
-  // ══════════════════════════════════════════════════════════════
-  // ЗАДАНИЕ — loadReviews:
-  //
-  // 1. Сделай fetch на `${API}/reviews/?product_id=${selectedProductId}`
-  //
-  // 2. Получи массив отзывов
-  //
-  // 3. Если массив пустой — покажи "Пока нет отзывов"
-  //
-  // 4. Для каждого отзыва создай карточку:
-  //    <div class="review-card">
-  //      <div class="review-header">
-  //        <span class="review-author">Анна</span>
-  //        <span class="review-date">2026-03-20</span>
-  //      </div>
-  //      <div class="review-stars">★★★★★</div>
-  //      <div class="review-text">Отличный звук!</div>
-  //    </div>
-  //
-  // Подсказка: используй renderStars(review.rating) для звёзд
-  //
-  // 5. При ошибке — покажи сообщение
-  //
-  // Пример:
-  //
-  // try {
-  //   const res = await fetch(`${API}/reviews/?product_id=${selectedProductId}`);
-  //   const data = await res.json();
-  //   reviewsList.innerHTML = "";
-  //   if (data.length === 0) {
-  //     reviewsList.innerHTML = "<p>Пока нет отзывов</p>";
-  //     return;
-  //   }
-  //   data.forEach(r => {
-  //     const card = document.createElement("div");
-  //     card.className = "review-card";
-  //     card.innerHTML = `
-  //       <div class="review-header">
-  //         <span class="review-author">${r.author}</span>
-  //         <span class="review-date">${r.date}</span>
-  //       </div>
-  //       <div class="review-stars">${renderStars(r.rating)}</div>
-  //       <div class="review-text">${r.text}</div>
-  //     `;
-  //     reviewsList.append(card);
-  //   });
-  // } catch (err) { ... }
-  // ══════════════════════════════════════════════════════════════
-
+ 
   try {
     const res = await fetch(
       `${API}/reviews/?product_id=${selectedProductId}`
@@ -124,9 +68,6 @@ async function loadReviews() {
   }
 }
 
-/* ═══════════════════════════════════════
-   СТАТИСТИКА  — задание студента
-   ═══════════════════════════════════════ */
 
 const avgNum        = document.getElementById("avg-num");
 const avgStars      = document.getElementById("avg-stars");
@@ -134,32 +75,6 @@ const breakdown     = document.getElementById("stars-breakdown");
 const totalReviews  = document.getElementById("total-reviews");
 
 async function loadStats() {
-  // ══════════════════════════════════════════════════════════════
-  // ЗАДАНИЕ — loadStats:
-  //
-  // 1. Сделай fetch на `${API}/reviews/stats?product_id=${selectedProductId}`
-  //
-  // 2. Получи объект: { product_id, total_reviews, average_rating, stars: {"5":1, ...} }
-  //
-  // 3. Обнови элементы:
-  //    avgNum.textContent = data.average_rating.toFixed(1);
-  //    avgStars.textContent = renderStars(Math.round(data.average_rating));
-  //    totalReviews.textContent = `${data.total_reviews} отзывов`;
-  //
-  // 4. Для breakdown (полоски 5★ → 1★) создай строки:
-  //    for (let i = 5; i >= 1; i--) {
-  //      const count = data.stars[String(i)];
-  //      const percent = data.total_reviews ? (count / data.total_reviews * 100) : 0;
-  //      // создай <div class="star-row"> с label, bar-fill (width=percent%), num
-  //    }
-  //
-  // Пример строки:
-  //   <div class="star-row">
-  //     <span class="label">5★</span>
-  //     <div class="star-bar"><div class="star-bar-fill" style="width:50%"></div></div>
-  //     <span class="num">1</span>
-  //   </div>
-  // ══════════════════════════════════════════════════════════════
 
   try {
     const res = await fetch(
@@ -197,10 +112,6 @@ async function loadStats() {
     console.error("loadStats error:", err);
   }
 }
-
-/* ═══════════════════════════════════════
-   ФОРМА ОТЗЫВА  — задание студента
-   ═══════════════════════════════════════ */
 
 const starPicker = document.getElementById("star-picker");
 const ratingInput = document.getElementById("review-rating");
@@ -271,7 +182,7 @@ if (reviewForm && reviewAuthor && reviewText) {
   });
 }
 
-/* ── Старт ── */
+
 loadProducts();
 loadReviews();
 loadStats();
