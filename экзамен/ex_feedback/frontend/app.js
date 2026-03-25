@@ -32,7 +32,7 @@ const reviewsList = document.getElementById("reviews-list");
 
 // Вспомогательная функция — рендер звёзд
 function renderStars(rating) {
-  return "★".repeat(rating) + "☆".repeat(5 - rating);
+  return "★".repeat(rating) + "☆".repeat(5 - rating); // repeat - повторение строки указанное кол раз
 }
 
 async function loadReviews() {
@@ -82,8 +82,8 @@ async function loadStats() {
     );
     const data = await res.json();
 
-    avgNum.textContent = Number(data.average_rating).toFixed(1);
-    avgStars.textContent = renderStars(Math.round(data.average_rating));
+    avgNum.textContent = Number(data.average_rating).toFixed(1); // средний рейтинг, преобразует в число, округляет
+    avgStars.textContent = renderStars(Math.round(data.average_rating)); // Math.round - округляет до целого
     totalReviews.textContent = `${data.total_reviews} отзывов`;
 
     breakdown.innerHTML = "";
@@ -120,9 +120,9 @@ let currentRating = 0;
 
 if (starPicker && ratingInput) {
   starPicker.addEventListener("click", (e) => {
-    if (!e.target.classList.contains("pick-star")) return;
+    if (!e.target.classList.contains("pick-star")) return; // проверка нажатия на звезду с помощью контейнера
 
-    currentRating = Number(e.target.dataset.value);
+    currentRating = Number(e.target.dataset.value); // уст выбранный рейтинг
     ratingInput.value = currentRating;
 
     document.querySelectorAll(".pick-star").forEach((s) => {
