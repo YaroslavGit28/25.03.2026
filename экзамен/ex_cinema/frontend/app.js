@@ -114,7 +114,7 @@ async function loadSessions() {
     sessionList.innerHTML = "";
 
     if (data.length === 0) {
-      sessionList.innerHTML = "<p style='color:#999'>Пока нет сеансов</p>";
+      sessionList.innerHTML = "<p style='color:#888'>Пока нет сеансов</p>";
       return;
     }
 
