@@ -9,7 +9,7 @@ const movieYear  = document.getElementById("movie-year");
 
 async function loadMovies() {
   try {
-    const res  = await fetch(`${API}/movies/`);
+    const res  = await fetch(`${API}/movies/`); // await нужен для того чтобы js дождался завершения запроса
     const data = await res.json();
     movieList.innerHTML = "";
 
@@ -40,17 +40,17 @@ async function loadMovies() {
 }
 
 movieForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
+  e.preventDefault(); // отменяет штатное поведение
   await fetch(`${API}/movies/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       title: movieTitle.value.trim(),
       genre: movieGenre.value.trim(),
-      year:  Number(movieYear.value),
+      year:  Number(movieYear.value), // преобразуем в число
     }),
   });
-  movieForm.reset();
+  movieForm.reset(); // очищает все поля формы к первоначальной
   loadMovies();
 });
 
@@ -95,7 +95,7 @@ const sessionList  = document.getElementById("session-list");
 const filterMovie  = document.getElementById("filter-movie");
 
 // Фильтр — при смене загружаем сеансы заново
-filterMovie.addEventListener("change", () => loadSessions());
+filterMovie.addEventListener("change", () => loadSessions()); // при изм выбранного фильма перезагружаем сеансы
 
 async function loadSessions() {
   try {
@@ -106,7 +106,7 @@ async function loadSessions() {
       : `${API}/sessions/`;
 
     const res = await fetch(url);
-    if (!res.ok) {
+    if (!res.ok) { // ок 200-299 статус http если все ок
       throw new Error(`HTTP ${res.status}`);
     }
 
