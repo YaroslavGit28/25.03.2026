@@ -20,12 +20,12 @@ class SessionIn(BaseModel):
 
 
 @router.get("/")
-def get_sessions(movie_id: int | None = Query(default=None)):
+def get_sessions(movie_id: int | None = Query(default=None)): // имя параметра целое\ пустое \Query работа с ключ:знач
     """Возвращает список сеансов (фильтруется по movie_id, если задан)."""
     if movie_id is None:
         return db
 
-    return [s for s in db if s["movie_id"] == movie_id]
+    return [s for s in db if s["movie_id"] == movie_id]  // отправляет отфильтрованный список, только те у которых совпадает
 
 
 @router.post("/", status_code=201)
@@ -33,11 +33,11 @@ def add_session(body: SessionIn):
     """Добавляет сеанс и проверяет, что фильм существует."""
     from routers.movies import db as movies_db
 
-    movie_exists = any(m["id"] == body.movie_id for m in movies_db)
+    movie_exists = any(m["id"] == body.movie_id for m in movies_db) // any возвращает тру, если хоть один тру, фолс, если все фолс
     if not movie_exists:
         raise HTTPException(404, "Фильм не найден")
 
-    if not body.time.strip():
+    if not body.time.strip(): // как trim
         raise HTTPException(400, "Некорректное время")
     if body.price <= 0:
         raise HTTPException(400, "Некорректная цена")
