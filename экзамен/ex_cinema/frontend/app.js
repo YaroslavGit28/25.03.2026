@@ -90,9 +90,6 @@ function updateMovieSelects(movies) {
   }
 }
 
-/* ═══════════════════════════════════════
-   СЕАНСЫ  — задание студента
-   ═══════════════════════════════════════ */
 
 const sessionList  = document.getElementById("session-list");
 const filterMovie  = document.getElementById("filter-movie");
@@ -101,30 +98,6 @@ const filterMovie  = document.getElementById("filter-movie");
 filterMovie.addEventListener("change", () => loadSessions());
 
 async function loadSessions() {
-  // ══════════════════════════════════════════════════════════════
-  // ЗАДАНИЕ — loadSessions:
-  //
-  // 1. Определи URL для запроса:
-  //    - если filterMovie.value не пустой:
-  //        `${API}/sessions/?movie_id=${filterMovie.value}`
-  //    - иначе: `${API}/sessions/`
-  //
-  // 2. Сделай fetch и получи массив сеансов
-  //
-  // 3. Для каждого сеанса создай карточку:
-  //    <div class="session-card">
-  //      <div class="session-info">
-  //        <div class="session-time">18:00</div>
-  //        <div class="session-meta">Фильм ID: 1 · 450 ₽ · 50 мест</div>
-  //      </div>
-  //      <button>✕</button>  ← вызывает deleteSession(session.id)
-  //    </div>
-  //    и добавь в sessionList
-  //
-  // 4. При ошибке — покажи сообщение в sessionList
-  //
-  // Подсказка — посмотри как сделана loadMovies()
-  // ══════════════════════════════════════════════════════════════
   try {
     // Если выбран фильм — фильтруем сеансы по нему
     const movieId = filterMovie.value;
