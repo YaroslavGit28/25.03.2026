@@ -52,7 +52,7 @@ def add_review(body: ReviewIn):
         "author": author,
         "text": text,
         "rating": body.rating,
-        "date": datetime.now().strftime("%Y-%m-%d"),
+        "date": datetime.now().strftime("%Y-%m-%d"), // текущее время и его формат
     }
     db.append(review)
     next_id += 1
@@ -64,11 +64,11 @@ def get_stats(product_id: int):
     reviews = [r for r in db if r["product_id"] == product_id]
     total = len(reviews)
 
-    avg = round((sum(r["rating"] for r in reviews) / total), 1) if total else 0
+    avg = round((sum(r["rating"] for r in reviews) / total), 1) if total else 0 // средний рейтинг и его округление до 1 знака или возвращает 0
 
     stars: dict[str, int] = {}
     for i in range(1, 6):
-        stars[str(i)] = sum(1 for r in reviews if r["rating"] == i)
+        stars[str(i)] = sum(1 for r in reviews if r["rating"] == i) // сколько отзывов имеют i
 
     return {
         "product_id": product_id,
